@@ -34,19 +34,28 @@ const posts = [
 ]
 
 export function getPosts() {
-  return axios.get('http://localhost:4000/posts')
+  return posts
 }
 
-export function getPostById(id: number) {
-  return axios.get(`http://localhost:4000/posts/${id}`)
+export function getPostById(id: string) {
+  const numberId = parseInt(id)
+  return posts.find((item) => item.id === numberId)
 }
 
-export function createPost(data: any) {
-  return axios.post('http://localhost:4000/posts', data)
-}
-export function updatePost(id: number, data: any) {
-  return axios.put(`http://localhost:4000/posts/${id}`, data)
-}
-export function deletePost(id: number) {
-  return axios.delete(`http://localhost:4000/posts/${id}`)
-}
+// export function getPosts() {
+//   return axios.get('http://localhost:4000/posts')
+// }
+
+// export function getPostById(id: number) {
+//   return axios.get(`http://localhost:4000/posts/${id}`)
+// }
+
+// export function createPost(data: any) {
+//   return axios.post('http://localhost:4000/posts', data)
+// }
+// export function updatePost(id: number, data: any) {
+//   return axios.put(`http://localhost:4000/posts/${id}`, data)
+// }
+// export function deletePost(id: number) {
+//   return axios.delete(`http://localhost:4000/posts/${id}`)
+// }

@@ -41,7 +41,9 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const goPage = () => {
-  router.push('/posts/create')
+  router.push({
+    name: 'postCreate'
+  })
 }
 </script>
 
