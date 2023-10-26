@@ -28,7 +28,7 @@ const route = useRoute()
 const router = useRouter()
 const id = route.params.id
 
-const goDetailPage = () => router.push({ name: 'postDetail', params: { id } })
+const goDetailPage = () => router.push({ name: 'PostDetail', params: { id } })
 </script>
 
 <style></style>

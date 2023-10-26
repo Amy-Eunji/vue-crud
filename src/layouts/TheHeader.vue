@@ -42,7 +42,7 @@ const router = useRouter()
 
 const goPage = () => {
   router.push({
-    name: 'postCreate'
+    name: 'PostCreate'
   })
 }
 </script>

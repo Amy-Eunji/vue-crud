@@ -4,16 +4,16 @@
   <div class="row g-3">
     <div v-for="post in posts" :key="post.id" class="col-4">
       <PostItem
-        :title="posts.title"
-        :content="posts.content"
-        :created-at="posts.createrdAt"
-        @click="goPage(posts.id)"
+        :title="post.title"
+        :content="post.content"
+        :created-at="post.createdAt"
+        @click="goPage(post.id)"
       ></PostItem>
     </div>
   </div>
   <hr class="my-4" />
   <AppCard>
-    <PostDetailView :id="1"></PostDetailView>
+    <PostDetailView :id="2"></PostDetailView>
   </AppCard>
 </template>
 
@@ -29,16 +29,16 @@ import { getPosts } from '../../api/posts'
 const router = useRouter()
 const posts = ref([])
 
-const fetchPosts = () => {
-  // const { data } = await getPosts()
-  posts.value = getPosts()
+const fetchPosts = async () => {
+  const { data } = await getPosts()
+  posts.value = data
 }
 fetchPosts()
 
 const goPage = () => {
   router.push({
-    name: 'postDetail',
-    params: { id }
+    name: 'PostDetail',
+    params: { id: Number }
   })
 }
 </script>
