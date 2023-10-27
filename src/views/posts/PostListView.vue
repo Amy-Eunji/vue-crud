@@ -11,10 +11,6 @@
       ></PostItem>
     </div>
   </div>
-  <hr class="my-4" />
-  <AppCard>
-    <PostDetailView :id="2"></PostDetailView>
-  </AppCard>
 </template>
 
 <script setup>
@@ -22,23 +18,25 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import PostItem from '../../components/posts/PostItem.vue'
-import AppCard from '../../components/AppCard.vue'
-import PostDetailView from '../posts/PostDetailView.vue'
 import { getPosts } from '../../api/posts'
 
 const router = useRouter()
 const posts = ref([])
 
 const fetchPosts = async () => {
-  const { data } = await getPosts()
-  posts.value = data
+  try {
+    const { data } = await getPosts()
+    posts.value = data
+  } catch (error) {
+    console.error(error)
+  }
 }
 fetchPosts()
 
-const goPage = () => {
+const goPage = (id) => {
   router.push({
     name: 'PostDetail',
-    params: { id: Number }
+    params: { id }
   })
 }
 </script>

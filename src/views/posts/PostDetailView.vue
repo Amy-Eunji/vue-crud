@@ -18,26 +18,41 @@
       <button class="btn btn-outline-primary" @click="goEditPage">Edit</button>
     </div>
     <div class="col-auto">
-      <button class="btn btn-outline-danger">Delete</button>
+      <button class="btn btn-outline-danger" @click="remove">Delete</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { getPostById } from '../../api/posts'
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+
+import { getPostById, deletePost } from '../../api/posts'
 
 const route = useRoute()
 const router = useRouter()
 const id = route.params.id
 const form = ref({})
 
-const fetchPost = () => {
-  const data = getPostById(id)
-  form.value = { ...data }
+const fetchPost = async () => {
+  try {
+    const { data } = await getPostById(id)
+    form.value = { ...data }
+  } catch (error) {
+    console.error(error)
+  }
 }
 fetchPost()
+const remove = async () => {
+  try {
+    if (confirm('삭제하시겠습니까?')) {
+      await deletePost(id)
+      router.push({ name: 'PostList' })
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 const goListPage = () => router.push({ name: 'PostList' })
 const goEditPage = () => router.push({ name: 'PostEdit', params: { id } })
